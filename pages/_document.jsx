@@ -1,7 +1,9 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document';
+// this is used to process CSS server-side before App is rendered to the page
+
+import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
-class MyDocument extends Document {
+export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet();
     const page = renderPage((App) => (props) =>
@@ -13,15 +15,13 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
-        <Head>{styleTags}</Head>
+      <html>
+        <Head>{this.props.styleTags}</Head>
         <body>
           <Main />
           <NextScript />
         </body>
-      </Html>
+      </html>
     );
   }
 }
-
-export default MyDocument;
